@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://wf8kiccw7idb"]
+
+[ext_resource type="Texture2D" uid="uid://c5pskbn021fbt" path="res://button3.png" id="1_bxjh5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1bvp3"]
+bounce = 0.8
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1bvp3"]
+
+[node name="plinko ball" type="RigidBody2D" unique_id=1790282866]
+scale = Vector2(1.0075891, 1.004331)
+physics_material_override = SubResource("PhysicsMaterial_1bvp3")
+gravity_scale = 1.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1118560880]
+scale = Vector2(2.1075265, 2.1075265)
+shape = SubResource("CircleShape2D_1bvp3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=959871773]
+texture_filter = 1
+scale = Vector2(2.7999997, 2.7999997)
+texture = ExtResource("1_bxjh5")
