@@ -1,0 +1,175 @@
+[gd_scene format=3 uid="uid://3cy55wfiljec"]
+
+[ext_resource type="Texture2D" uid="uid://cgipjlyrkwkvh" path="res://ART/button.png" id="1_ys6xq"]
+[ext_resource type="Texture2D" uid="uid://c20673vfa80yp" path="res://ART/button4.png" id="2_df0lc"]
+[ext_resource type="Texture2D" uid="uid://bybo3tbyk8jm4" path="res://ART/button2.png" id="3_h2jjw"]
+[ext_resource type="Texture2D" uid="uid://c5pskbn021fbt" path="res://PLACEHOLDER/button3.png" id="4_ab6ae"]
+[ext_resource type="Script" uid="uid://chra1ane45ay1" path="res://SCRIPTS/node.gd" id="5_ceyew"]
+[ext_resource type="Script" uid="uid://b1gk4th6cfd1x" path="res://SCRIPTS/animatable_body_2d.gd" id="6_o4jo6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lquwl"]
+
+[sub_resource type="Curve2D" id="Curve2D_lquwl"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 617, 13, 0, 0, 0, 0, 1130, 14, 0, 0, 0, 0, 617, 13)
+}
+point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
+size = Vector2(20, 662)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(568, 20)
+
+[sub_resource type="GDScript" id="GDScript_5vw27"]
+script/source = "extends Node2D
+
+#var score = 0
+
+
+#func _on_texture_button_pressed() -> void:
+	#if score < 2:
+		#score += 1
+	#$Label.text = str(score)
+"
+
+[sub_resource type="Curve2D" id="Curve2D_7mycd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 679, 487, 0, 0, 0, 0, 1054, 487, 0, 0, 0, 0, 679, 487)
+}
+point_count = 3
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7mycd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
+size = Vector2(20, 169)
+
+[node name="Main" type="Node2D" unique_id=1303778982]
+
+[node name="Polygon2D" type="Line2D" parent="." unique_id=2042254922]
+position = Vector2(384, 0)
+points = PackedVector2Array(0, 0, 0, 650)
+
+[node name="Polygon2D" type="Line2D" parent="Polygon2D" unique_id=1742003137]
+position = Vector2(-555, -12)
+points = PackedVector2Array(764, 678, 764, 3)
+
+[node name="Polygon2D2" type="Line2D" parent="Polygon2D" unique_id=1366027309]
+position = Vector2(-408, -22)
+points = PackedVector2Array(610, 665, 1176, 665)
+
+[node name="Polygon2D3" type="Line2D" parent="Polygon2D" unique_id=1342163931]
+position = Vector2(-1, -25)
+points = PackedVector2Array(764, 678, 764, 3)
+
+[node name="button" type="Marker2D" parent="." unique_id=592349946]
+position = Vector2(488, 256)
+
+[node name="TextureButton" type="TextureButton" parent="button" unique_id=758273287]
+texture_filter = 1
+offset_left = -78.0
+offset_top = -1.0
+offset_right = 78.0
+offset_bottom = 155.0
+texture_normal = ExtResource("1_ys6xq")
+texture_pressed = ExtResource("2_df0lc")
+texture_hover = ExtResource("3_h2jjw")
+stretch_mode = 0
+
+[node name="plinko peg" type="RigidBody2D" parent="." unique_id=1769743643]
+position = Vector2(-3, 15)
+freeze = true
+
+[node name="peg" type="CollisionShape2D" parent="plinko peg" unique_id=1365473359]
+position = Vector2(850.5079, 185.5079)
+scale = Vector2(1.088985, 1.088985)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="pegs" type="Sprite2D" parent="plinko peg" unique_id=258983939]
+texture_filter = 1
+position = Vector2(850.5079, 185.50789)
+scale = Vector2(1.4684825, 1.4684825)
+texture = ExtResource("4_ab6ae")
+
+[node name="dropper" type="Path2D" parent="." unique_id=1168654586]
+curve = SubResource("Curve2D_lquwl")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="dropper" unique_id=771330223]
+position = Vector2(617, 13)
+rotation = 0.0019493153
+
+[node name="Node" type="Marker2D" parent="dropper/PathFollow2D" unique_id=1859532258]
+script = ExtResource("5_ceyew")
+
+[node name="Sprite2D" type="Sprite2D" parent="dropper/PathFollow2D/Node" unique_id=221279299]
+texture = ExtResource("1_ys6xq")
+
+[node name="wall" type="StaticBody2D" parent="." unique_id=1322147094]
+position = Vector2(384, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall" unique_id=366443318]
+position = Vector2(204, 321)
+shape = SubResource("RectangleShape2D_lquwl")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall" unique_id=1419021536]
+position = Vector2(486, 648)
+shape = SubResource("RectangleShape2D_7mycd")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="wall" unique_id=1063643596]
+position = Vector2(768, 330)
+shape = SubResource("RectangleShape2D_lquwl")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="wall" unique_id=223875348]
+position = Vector2(488, -11)
+shape = SubResource("RectangleShape2D_7mycd")
+
+[node name="coin slot" type="Node2D" parent="." unique_id=478993576]
+script = SubResource("GDScript_5vw27")
+
+[node name="coin_button" type="TextureButton" parent="coin slot" unique_id=838015408]
+texture_filter = 1
+offset_left = 470.0
+offset_top = 475.0
+offset_right = 510.0
+offset_bottom = 515.0
+texture_normal = ExtResource("2_df0lc")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="coin slot" unique_id=155564061]
+offset_left = 474.0
+offset_top = 528.0
+offset_right = 514.0
+offset_bottom = 551.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="blocker" type="Path2D" parent="." unique_id=1112949655]
+position = Vector2(0, -40)
+curve = SubResource("Curve2D_7mycd")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="blocker" unique_id=1213242049]
+position = Vector2(679, 487)
+rotates = false
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="blocker/PathFollow2D" unique_id=1885624640]
+position = Vector2(-86, 0)
+physics_material_override = SubResource("PhysicsMaterial_7mycd")
+sync_to_physics = false
+script = ExtResource("6_o4jo6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blocker/PathFollow2D/AnimatableBody2D" unique_id=1414250057]
+texture_filter = 1
+position = Vector2(86.5, 0)
+rotation = 1.5707964
+scale = Vector2(0.85734916, 0.7600049)
+shape = SubResource("RectangleShape2D_272bh")
+
+[node name="Sprite2D" type="Sprite2D" parent="blocker/PathFollow2D/AnimatableBody2D" unique_id=764856274]
+position = Vector2(86, 0)
+scale = Vector2(7.8549967, 0.7600049)
+texture = ExtResource("1_ys6xq")
+
+[connection signal="pressed" from="button/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="button/TextureButton" to="dropper/PathFollow2D/Node" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="coin slot/coin_button" to="dropper/PathFollow2D/Node" method="_on_coin_button_pressed"]
