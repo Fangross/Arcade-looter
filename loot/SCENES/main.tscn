@@ -1,13 +1,21 @@
 [gd_scene format=3 uid="uid://3cy55wfiljec"]
 
 [ext_resource type="Texture2D" uid="uid://cgipjlyrkwkvh" path="res://ART/button.png" id="1_ys6xq"]
+[ext_resource type="Script" uid="uid://dvdj5hb58t7sw" path="res://SCENES/rotatingplatform1.gd" id="2_ab6ae"]
 [ext_resource type="Texture2D" uid="uid://c20673vfa80yp" path="res://ART/button4.png" id="2_df0lc"]
 [ext_resource type="Texture2D" uid="uid://bybo3tbyk8jm4" path="res://ART/button2.png" id="3_h2jjw"]
 [ext_resource type="Texture2D" uid="uid://c5pskbn021fbt" path="res://PLACEHOLDER/button3.png" id="4_ab6ae"]
+[ext_resource type="Script" uid="uid://cj14duj7fplyy" path="res://SCENES/rotatingplatform_2.gd" id="4_ceyew"]
 [ext_resource type="Script" uid="uid://chra1ane45ay1" path="res://SCRIPTS/node.gd" id="5_ceyew"]
 [ext_resource type="Script" uid="uid://b1gk4th6cfd1x" path="res://SCRIPTS/animatable_body_2d.gd" id="6_o4jo6"]
+[ext_resource type="Script" uid="uid://belsbryf7lhh2" path="res://SCRIPTS/deathzone.gd" id="7_df0lc"]
+[ext_resource type="Texture2D" uid="uid://p8n6h4cgnamx" path="res://PLACEHOLDER/bucket.png" id="8_h2jjw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lquwl"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h2jjw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ab6ae"]
 
 [sub_resource type="Curve2D" id="Curve2D_lquwl"]
 _data = {
@@ -21,21 +29,9 @@ size = Vector2(20, 662)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
 size = Vector2(568, 20)
 
-[sub_resource type="GDScript" id="GDScript_5vw27"]
-script/source = "extends Node2D
-
-#var score = 0
-
-
-#func _on_texture_button_pressed() -> void:
-	#if score < 2:
-		#score += 1
-	#$Label.text = str(score)
-"
-
 [sub_resource type="Curve2D" id="Curve2D_7mycd"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 679, 487, 0, 0, 0, 0, 1054, 487, 0, 0, 0, 0, 679, 487)
+"points": PackedVector2Array(0, 0, 0, 0, 956, 488, 0, 0, 0, 0, 781, 488, 0, 0, 0, 0, 956, 488)
 }
 point_count = 3
 
@@ -44,23 +40,1187 @@ point_count = 3
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
 size = Vector2(20, 169)
 
+[sub_resource type="Curve2D" id="Curve2D_ys6xq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 663, 595, 0, 0, 0, 0, 1098, 595, 0, 0, 0, 0, 663, 595)
+}
+point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_df0lc"]
+size = Vector2(12.647041, 20)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_df0lc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2jjw"]
+size = Vector2(66, 13.999977)
+
 [node name="Main" type="Node2D" unique_id=1303778982]
 
-[node name="Polygon2D" type="Line2D" parent="." unique_id=2042254922]
-position = Vector2(384, 0)
-points = PackedVector2Array(0, 0, 0, 650)
+[node name="pegs" type="Node2D" parent="." unique_id=79818689]
 
-[node name="Polygon2D" type="Line2D" parent="Polygon2D" unique_id=1742003137]
-position = Vector2(-555, -12)
-points = PackedVector2Array(764, 678, 764, 3)
+[node name="plinko peg" type="RigidBody2D" parent="pegs" unique_id=1769743643]
+position = Vector2(627, 76)
+freeze = true
 
-[node name="Polygon2D2" type="Line2D" parent="Polygon2D" unique_id=1366027309]
-position = Vector2(-408, -22)
-points = PackedVector2Array(610, 665, 1176, 665)
+[node name="peg colider" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1365473359]
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
 
-[node name="Polygon2D3" type="Line2D" parent="Polygon2D" unique_id=1342163931]
-position = Vector2(-1, -25)
-points = PackedVector2Array(764, 678, 764, 3)
+[node name="peg art" type="Sprite2D" parent="pegs/plinko peg" unique_id=258983939]
+texture_filter = 1
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider2" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=293615128]
+position = Vector2(35, 0)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art2" type="Sprite2D" parent="pegs/plinko peg" unique_id=894241830]
+texture_filter = 1
+position = Vector2(35, 0)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider3" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=19726550]
+position = Vector2(70, 0)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art3" type="Sprite2D" parent="pegs/plinko peg" unique_id=1701984537]
+texture_filter = 1
+position = Vector2(70, 0)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider4" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1530040942]
+position = Vector2(105, 0)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art4" type="Sprite2D" parent="pegs/plinko peg" unique_id=882137981]
+texture_filter = 1
+position = Vector2(105, 0)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider5" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1243527419]
+position = Vector2(140, 0)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art5" type="Sprite2D" parent="pegs/plinko peg" unique_id=2027392112]
+texture_filter = 1
+position = Vector2(140, 0)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider6" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1195789637]
+position = Vector2(175, 0)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art6" type="Sprite2D" parent="pegs/plinko peg" unique_id=717500755]
+texture_filter = 1
+position = Vector2(175, 0)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider7" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1393033167]
+position = Vector2(210, 0)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art7" type="Sprite2D" parent="pegs/plinko peg" unique_id=825843927]
+texture_filter = 1
+position = Vector2(210, 0)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider8" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1841904165]
+position = Vector2(245, 0)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art8" type="Sprite2D" parent="pegs/plinko peg" unique_id=409161568]
+texture_filter = 1
+position = Vector2(245, 0)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider9" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1836845826]
+position = Vector2(280, 0)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art9" type="Sprite2D" parent="pegs/plinko peg" unique_id=659736538]
+texture_filter = 1
+position = Vector2(280, 0)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider10" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=47633720]
+position = Vector2(315, 0)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art10" type="Sprite2D" parent="pegs/plinko peg" unique_id=242611012]
+texture_filter = 1
+position = Vector2(315, 0)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider11" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1804365426]
+position = Vector2(350, 0)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art11" type="Sprite2D" parent="pegs/plinko peg" unique_id=326700229]
+texture_filter = 1
+position = Vector2(350, 0)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider12" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1974830094]
+position = Vector2(385, 0)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art12" type="Sprite2D" parent="pegs/plinko peg" unique_id=1536840829]
+texture_filter = 1
+position = Vector2(385, 0)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider13" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1424992992]
+position = Vector2(420, 0)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art13" type="Sprite2D" parent="pegs/plinko peg" unique_id=812547447]
+texture_filter = 1
+position = Vector2(420, 0)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider14" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=671998491]
+position = Vector2(455, 0)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art14" type="Sprite2D" parent="pegs/plinko peg" unique_id=1636089530]
+texture_filter = 1
+position = Vector2(455, 0)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider15" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1940253405]
+position = Vector2(490, 0)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art15" type="Sprite2D" parent="pegs/plinko peg" unique_id=817681122]
+texture_filter = 1
+position = Vector2(490, 0)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="row 2" type="Node" parent="pegs/plinko peg" unique_id=1749567485]
+
+[node name="peg colider17" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=2074930731]
+position = Vector2(18, 25)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art17" type="Sprite2D" parent="pegs/plinko peg" unique_id=1060265907]
+texture_filter = 1
+position = Vector2(18, 25)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider18" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=187516122]
+position = Vector2(53, 25)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art18" type="Sprite2D" parent="pegs/plinko peg" unique_id=124284409]
+texture_filter = 1
+position = Vector2(53, 25)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider19" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=703672652]
+position = Vector2(88, 25)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art19" type="Sprite2D" parent="pegs/plinko peg" unique_id=1526688482]
+texture_filter = 1
+position = Vector2(88, 25)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider20" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=97015649]
+position = Vector2(123, 25)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art20" type="Sprite2D" parent="pegs/plinko peg" unique_id=150921251]
+texture_filter = 1
+position = Vector2(123, 25)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider21" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1846365516]
+position = Vector2(158, 25)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art21" type="Sprite2D" parent="pegs/plinko peg" unique_id=1980448503]
+texture_filter = 1
+position = Vector2(158, 25)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider22" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=866416667]
+position = Vector2(193, 25)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art22" type="Sprite2D" parent="pegs/plinko peg" unique_id=1446578043]
+texture_filter = 1
+position = Vector2(193, 25)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider23" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1440398459]
+position = Vector2(228, 25)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art23" type="Sprite2D" parent="pegs/plinko peg" unique_id=1971899406]
+texture_filter = 1
+position = Vector2(228, 25)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider24" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=395856836]
+position = Vector2(263, 25)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art24" type="Sprite2D" parent="pegs/plinko peg" unique_id=413433255]
+texture_filter = 1
+position = Vector2(263, 25)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider25" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=683794270]
+position = Vector2(298, 25)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art25" type="Sprite2D" parent="pegs/plinko peg" unique_id=2091098972]
+texture_filter = 1
+position = Vector2(298, 25)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider26" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=820075581]
+position = Vector2(333, 25)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art26" type="Sprite2D" parent="pegs/plinko peg" unique_id=873167489]
+texture_filter = 1
+position = Vector2(333, 25)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider27" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1631992723]
+position = Vector2(368, 25)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art27" type="Sprite2D" parent="pegs/plinko peg" unique_id=1651249300]
+texture_filter = 1
+position = Vector2(368, 25)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider28" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=2082482237]
+position = Vector2(403, 25)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art28" type="Sprite2D" parent="pegs/plinko peg" unique_id=260191963]
+texture_filter = 1
+position = Vector2(403, 25)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider29" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=921245365]
+position = Vector2(438, 25)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art29" type="Sprite2D" parent="pegs/plinko peg" unique_id=282139466]
+texture_filter = 1
+position = Vector2(438, 25)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider30" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1059058322]
+position = Vector2(473, 25)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art30" type="Sprite2D" parent="pegs/plinko peg" unique_id=2013549742]
+texture_filter = 1
+position = Vector2(473, 25)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="row 3" type="Node" parent="pegs/plinko peg" unique_id=1200069484]
+
+[node name="peg colider16" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=736047084]
+position = Vector2(0, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art16" type="Sprite2D" parent="pegs/plinko peg" unique_id=29388665]
+texture_filter = 1
+position = Vector2(0, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider31" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=433491198]
+position = Vector2(35, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art31" type="Sprite2D" parent="pegs/plinko peg" unique_id=1303930878]
+texture_filter = 1
+position = Vector2(35, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider32" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1260119104]
+position = Vector2(70, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art32" type="Sprite2D" parent="pegs/plinko peg" unique_id=2023130840]
+texture_filter = 1
+position = Vector2(70, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider33" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1576072595]
+position = Vector2(105, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art33" type="Sprite2D" parent="pegs/plinko peg" unique_id=363050533]
+texture_filter = 1
+position = Vector2(105, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider34" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=861724271]
+position = Vector2(140, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art34" type="Sprite2D" parent="pegs/plinko peg" unique_id=106774907]
+texture_filter = 1
+position = Vector2(140, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider35" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=8853787]
+position = Vector2(175, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art35" type="Sprite2D" parent="pegs/plinko peg" unique_id=870810602]
+texture_filter = 1
+position = Vector2(175, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider36" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1426107953]
+position = Vector2(210, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art36" type="Sprite2D" parent="pegs/plinko peg" unique_id=1373390325]
+texture_filter = 1
+position = Vector2(210, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider37" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=2049330164]
+position = Vector2(245, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art37" type="Sprite2D" parent="pegs/plinko peg" unique_id=1775495427]
+texture_filter = 1
+position = Vector2(245, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider38" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=2077196882]
+position = Vector2(280, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art38" type="Sprite2D" parent="pegs/plinko peg" unique_id=1882545788]
+texture_filter = 1
+position = Vector2(280, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider39" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=819321698]
+position = Vector2(315, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art39" type="Sprite2D" parent="pegs/plinko peg" unique_id=1646731069]
+texture_filter = 1
+position = Vector2(315, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider40" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=200173014]
+position = Vector2(350, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art40" type="Sprite2D" parent="pegs/plinko peg" unique_id=142963367]
+texture_filter = 1
+position = Vector2(350, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider41" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=692797128]
+position = Vector2(385, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art41" type="Sprite2D" parent="pegs/plinko peg" unique_id=732966551]
+texture_filter = 1
+position = Vector2(385, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider42" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=547196435]
+position = Vector2(420, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art42" type="Sprite2D" parent="pegs/plinko peg" unique_id=1088154695]
+texture_filter = 1
+position = Vector2(420, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider43" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=2033596099]
+position = Vector2(455, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art43" type="Sprite2D" parent="pegs/plinko peg" unique_id=1752068278]
+texture_filter = 1
+position = Vector2(455, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider44" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=258037846]
+position = Vector2(490, 50)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art44" type="Sprite2D" parent="pegs/plinko peg" unique_id=948779154]
+texture_filter = 1
+position = Vector2(490, 50)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="row 4" type="Node" parent="pegs/plinko peg" unique_id=399839679]
+
+[node name="peg colider45" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1258046667]
+position = Vector2(18, 75)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art45" type="Sprite2D" parent="pegs/plinko peg" unique_id=2034683039]
+texture_filter = 1
+position = Vector2(18, 75)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider46" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=2134899675]
+position = Vector2(53, 75)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art46" type="Sprite2D" parent="pegs/plinko peg" unique_id=1337725210]
+texture_filter = 1
+position = Vector2(53, 75)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider47" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=952911387]
+position = Vector2(88, 75)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art47" type="Sprite2D" parent="pegs/plinko peg" unique_id=1025742143]
+texture_filter = 1
+position = Vector2(88, 75)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider48" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=600329813]
+position = Vector2(123, 75)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art48" type="Sprite2D" parent="pegs/plinko peg" unique_id=1273360225]
+texture_filter = 1
+position = Vector2(123, 75)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider49" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1594112067]
+position = Vector2(158, 75)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art49" type="Sprite2D" parent="pegs/plinko peg" unique_id=2103230762]
+texture_filter = 1
+position = Vector2(158, 75)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider50" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=2070701913]
+position = Vector2(193, 75)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art50" type="Sprite2D" parent="pegs/plinko peg" unique_id=270137581]
+texture_filter = 1
+position = Vector2(193, 75)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider51" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=256840379]
+position = Vector2(228, 75)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art51" type="Sprite2D" parent="pegs/plinko peg" unique_id=413725320]
+texture_filter = 1
+position = Vector2(228, 75)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider52" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=259670011]
+position = Vector2(263, 75)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art52" type="Sprite2D" parent="pegs/plinko peg" unique_id=570279424]
+texture_filter = 1
+position = Vector2(263, 75)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider53" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=416308159]
+position = Vector2(298, 75)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art53" type="Sprite2D" parent="pegs/plinko peg" unique_id=991527942]
+texture_filter = 1
+position = Vector2(298, 75)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider54" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1270885562]
+position = Vector2(333, 75)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art54" type="Sprite2D" parent="pegs/plinko peg" unique_id=595859883]
+texture_filter = 1
+position = Vector2(333, 75)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider55" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=2097794420]
+position = Vector2(368, 75)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art55" type="Sprite2D" parent="pegs/plinko peg" unique_id=219814249]
+texture_filter = 1
+position = Vector2(368, 75)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider56" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=13405921]
+position = Vector2(403, 75)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art56" type="Sprite2D" parent="pegs/plinko peg" unique_id=652402004]
+texture_filter = 1
+position = Vector2(403, 75)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider57" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=525374787]
+position = Vector2(438, 75)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art57" type="Sprite2D" parent="pegs/plinko peg" unique_id=848865684]
+texture_filter = 1
+position = Vector2(438, 75)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider58" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=333651665]
+position = Vector2(473, 75)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art58" type="Sprite2D" parent="pegs/plinko peg" unique_id=292561315]
+texture_filter = 1
+position = Vector2(473, 75)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="row 5" type="Node" parent="pegs/plinko peg" unique_id=938680404]
+
+[node name="peg colider59" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=88748144]
+position = Vector2(0, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art59" type="Sprite2D" parent="pegs/plinko peg" unique_id=1725310768]
+texture_filter = 1
+position = Vector2(0, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider60" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1353100631]
+position = Vector2(35, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art60" type="Sprite2D" parent="pegs/plinko peg" unique_id=1283554346]
+texture_filter = 1
+position = Vector2(35, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider61" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1384680861]
+position = Vector2(70, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art61" type="Sprite2D" parent="pegs/plinko peg" unique_id=240775921]
+texture_filter = 1
+position = Vector2(70, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider62" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=570873242]
+position = Vector2(105, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art62" type="Sprite2D" parent="pegs/plinko peg" unique_id=8311908]
+texture_filter = 1
+position = Vector2(105, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider63" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=632689495]
+position = Vector2(140, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art63" type="Sprite2D" parent="pegs/plinko peg" unique_id=1453089564]
+texture_filter = 1
+position = Vector2(140, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider64" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=350609280]
+position = Vector2(175, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art64" type="Sprite2D" parent="pegs/plinko peg" unique_id=715211841]
+texture_filter = 1
+position = Vector2(175, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider65" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=326385546]
+position = Vector2(210, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art65" type="Sprite2D" parent="pegs/plinko peg" unique_id=97157573]
+texture_filter = 1
+position = Vector2(210, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider66" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1896822785]
+position = Vector2(245, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art66" type="Sprite2D" parent="pegs/plinko peg" unique_id=1823053]
+texture_filter = 1
+position = Vector2(245, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider67" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=667353473]
+position = Vector2(280, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art67" type="Sprite2D" parent="pegs/plinko peg" unique_id=592684547]
+texture_filter = 1
+position = Vector2(280, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider68" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=966197414]
+position = Vector2(315, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art68" type="Sprite2D" parent="pegs/plinko peg" unique_id=2029404114]
+texture_filter = 1
+position = Vector2(315, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider69" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1333667963]
+position = Vector2(350, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art69" type="Sprite2D" parent="pegs/plinko peg" unique_id=897050054]
+texture_filter = 1
+position = Vector2(350, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider70" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1026254765]
+position = Vector2(385, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art70" type="Sprite2D" parent="pegs/plinko peg" unique_id=2065732450]
+texture_filter = 1
+position = Vector2(385, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider71" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1372663815]
+position = Vector2(420, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art71" type="Sprite2D" parent="pegs/plinko peg" unique_id=1535746400]
+texture_filter = 1
+position = Vector2(420, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider72" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1919646860]
+position = Vector2(455, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art72" type="Sprite2D" parent="pegs/plinko peg" unique_id=164721107]
+texture_filter = 1
+position = Vector2(455, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider73" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=2110107501]
+position = Vector2(490, 100)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art73" type="Sprite2D" parent="pegs/plinko peg" unique_id=691415497]
+texture_filter = 1
+position = Vector2(490, 100)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="row 6" type="Node" parent="pegs/plinko peg" unique_id=1788633504]
+
+[node name="peg colider74" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1377488069]
+position = Vector2(18, 125)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art74" type="Sprite2D" parent="pegs/plinko peg" unique_id=1462546429]
+texture_filter = 1
+position = Vector2(18, 125)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider75" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1603460047]
+position = Vector2(53, 125)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art75" type="Sprite2D" parent="pegs/plinko peg" unique_id=1030288663]
+texture_filter = 1
+position = Vector2(53, 125)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider76" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=388502915]
+position = Vector2(88, 125)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art76" type="Sprite2D" parent="pegs/plinko peg" unique_id=2124049474]
+texture_filter = 1
+position = Vector2(88, 125)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider77" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1683731243]
+position = Vector2(123, 125)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art77" type="Sprite2D" parent="pegs/plinko peg" unique_id=240992009]
+texture_filter = 1
+position = Vector2(123, 125)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider78" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=509479987]
+position = Vector2(158, 125)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art78" type="Sprite2D" parent="pegs/plinko peg" unique_id=1813461289]
+texture_filter = 1
+position = Vector2(158, 125)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider79" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=446788828]
+position = Vector2(193, 125)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art79" type="Sprite2D" parent="pegs/plinko peg" unique_id=956903588]
+texture_filter = 1
+position = Vector2(193, 125)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider80" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1113434397]
+position = Vector2(228, 125)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art80" type="Sprite2D" parent="pegs/plinko peg" unique_id=45517689]
+texture_filter = 1
+position = Vector2(228, 125)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider81" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=2073387538]
+position = Vector2(263, 125)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art81" type="Sprite2D" parent="pegs/plinko peg" unique_id=159208422]
+texture_filter = 1
+position = Vector2(263, 125)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider82" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=370438700]
+position = Vector2(298, 125)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art82" type="Sprite2D" parent="pegs/plinko peg" unique_id=840482733]
+texture_filter = 1
+position = Vector2(298, 125)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider83" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1837943436]
+position = Vector2(333, 125)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art83" type="Sprite2D" parent="pegs/plinko peg" unique_id=922912902]
+texture_filter = 1
+position = Vector2(333, 125)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider84" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=2057492604]
+position = Vector2(368, 125)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art84" type="Sprite2D" parent="pegs/plinko peg" unique_id=709830486]
+texture_filter = 1
+position = Vector2(368, 125)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider85" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1383487333]
+position = Vector2(403, 125)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art85" type="Sprite2D" parent="pegs/plinko peg" unique_id=1601938494]
+texture_filter = 1
+position = Vector2(403, 125)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider86" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1073035339]
+position = Vector2(438, 125)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art86" type="Sprite2D" parent="pegs/plinko peg" unique_id=1039194918]
+texture_filter = 1
+position = Vector2(438, 125)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider87" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=2118618404]
+position = Vector2(473, 125)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art87" type="Sprite2D" parent="pegs/plinko peg" unique_id=339086779]
+texture_filter = 1
+position = Vector2(473, 125)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="row 7" type="Node" parent="pegs/plinko peg" unique_id=618123379]
+
+[node name="peg colider88" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=313750168]
+position = Vector2(0, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art88" type="Sprite2D" parent="pegs/plinko peg" unique_id=405297139]
+texture_filter = 1
+position = Vector2(0, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider89" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=438281848]
+position = Vector2(35, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art89" type="Sprite2D" parent="pegs/plinko peg" unique_id=1187820984]
+texture_filter = 1
+position = Vector2(35, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider90" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=847024062]
+position = Vector2(70, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art90" type="Sprite2D" parent="pegs/plinko peg" unique_id=453019424]
+texture_filter = 1
+position = Vector2(70, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider91" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=925071846]
+position = Vector2(105, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art91" type="Sprite2D" parent="pegs/plinko peg" unique_id=1715482449]
+texture_filter = 1
+position = Vector2(105, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider92" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=2004364435]
+position = Vector2(140, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art92" type="Sprite2D" parent="pegs/plinko peg" unique_id=846291827]
+texture_filter = 1
+position = Vector2(140, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider93" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=386598066]
+position = Vector2(175, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art93" type="Sprite2D" parent="pegs/plinko peg" unique_id=366198871]
+texture_filter = 1
+position = Vector2(175, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider94" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1734017044]
+position = Vector2(210, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art94" type="Sprite2D" parent="pegs/plinko peg" unique_id=975718265]
+texture_filter = 1
+position = Vector2(210, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider95" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1653728849]
+position = Vector2(245, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art95" type="Sprite2D" parent="pegs/plinko peg" unique_id=1915694782]
+texture_filter = 1
+position = Vector2(245, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider96" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=696497957]
+position = Vector2(280, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art96" type="Sprite2D" parent="pegs/plinko peg" unique_id=1811220780]
+texture_filter = 1
+position = Vector2(280, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider97" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1339286124]
+position = Vector2(315, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art97" type="Sprite2D" parent="pegs/plinko peg" unique_id=509834547]
+texture_filter = 1
+position = Vector2(315, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider98" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=436667998]
+position = Vector2(350, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art98" type="Sprite2D" parent="pegs/plinko peg" unique_id=1440911968]
+texture_filter = 1
+position = Vector2(350, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider99" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1044499255]
+position = Vector2(385, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art99" type="Sprite2D" parent="pegs/plinko peg" unique_id=546875702]
+texture_filter = 1
+position = Vector2(385, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider100" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=883668629]
+position = Vector2(420, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art100" type="Sprite2D" parent="pegs/plinko peg" unique_id=412392450]
+texture_filter = 1
+position = Vector2(420, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider101" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=214442828]
+position = Vector2(455, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art101" type="Sprite2D" parent="pegs/plinko peg" unique_id=1064075222]
+texture_filter = 1
+position = Vector2(455, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="peg colider102" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1533364309]
+position = Vector2(490, 150)
+scale = Vector2(0.5550533, 0.5550533)
+shape = SubResource("CircleShape2D_lquwl")
+
+[node name="peg art102" type="Sprite2D" parent="pegs/plinko peg" unique_id=1779453052]
+texture_filter = 1
+position = Vector2(490, 150)
+scale = Vector2(0.74848247, 0.74848247)
+texture = ExtResource("4_ab6ae")
+
+[node name="rotatingplatform" type="AnimatableBody2D" parent="pegs" unique_id=1000400517]
+position = Vector2(662, 300)
+physics_material_override = SubResource("PhysicsMaterial_h2jjw")
+sync_to_physics = false
+script = ExtResource("2_ab6ae")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pegs/rotatingplatform" unique_id=1207897034]
+scale = Vector2(5.48, 0.6)
+shape = SubResource("RectangleShape2D_ab6ae")
+
+[node name="Sprite2D" type="Sprite2D" parent="pegs/rotatingplatform" unique_id=2120534184]
+scale = Vector2(6.88, 1)
+texture = ExtResource("8_h2jjw")
+
+[node name="rotatingplatform2" type="AnimatableBody2D" parent="pegs" unique_id=595510113]
+position = Vector2(1077, 300)
+physics_material_override = SubResource("PhysicsMaterial_h2jjw")
+sync_to_physics = false
+script = ExtResource("4_ceyew")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pegs/rotatingplatform2" unique_id=1732053088]
+scale = Vector2(5.48, 0.6)
+shape = SubResource("RectangleShape2D_ab6ae")
+
+[node name="Sprite2D" type="Sprite2D" parent="pegs/rotatingplatform2" unique_id=325238984]
+scale = Vector2(6.88, 1)
+texture = ExtResource("8_h2jjw")
 
 [node name="button" type="Marker2D" parent="." unique_id=592349946]
 position = Vector2(488, 256)
@@ -75,21 +1235,6 @@ texture_normal = ExtResource("1_ys6xq")
 texture_pressed = ExtResource("2_df0lc")
 texture_hover = ExtResource("3_h2jjw")
 stretch_mode = 0
-
-[node name="plinko peg" type="RigidBody2D" parent="." unique_id=1769743643]
-position = Vector2(-3, 15)
-freeze = true
-
-[node name="peg" type="CollisionShape2D" parent="plinko peg" unique_id=1365473359]
-position = Vector2(850.5079, 185.5079)
-scale = Vector2(1.088985, 1.088985)
-shape = SubResource("CircleShape2D_lquwl")
-
-[node name="pegs" type="Sprite2D" parent="plinko peg" unique_id=258983939]
-texture_filter = 1
-position = Vector2(850.5079, 185.50789)
-scale = Vector2(1.4684825, 1.4684825)
-texture = ExtResource("4_ab6ae")
 
 [node name="dropper" type="Path2D" parent="." unique_id=1168654586]
 curve = SubResource("Curve2D_lquwl")
@@ -107,13 +1252,24 @@ texture = ExtResource("1_ys6xq")
 [node name="wall" type="StaticBody2D" parent="." unique_id=1322147094]
 position = Vector2(384, 0)
 
+[node name="Polygon2D" type="Line2D" parent="wall" unique_id=2042254922]
+points = PackedVector2Array(0, 0, 0, 650)
+
+[node name="Polygon2D" type="Line2D" parent="wall/Polygon2D" unique_id=1742003137]
+position = Vector2(-555, -12)
+points = PackedVector2Array(764, 678, 764, 3)
+
+[node name="Polygon2D2" type="Line2D" parent="wall/Polygon2D" unique_id=1366027309]
+position = Vector2(-408, -22)
+points = PackedVector2Array(610, 665, 1176, 665)
+
+[node name="Polygon2D3" type="Line2D" parent="wall/Polygon2D" unique_id=1342163931]
+position = Vector2(-1, -25)
+points = PackedVector2Array(764, 678, 764, 3)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall" unique_id=366443318]
 position = Vector2(204, 321)
 shape = SubResource("RectangleShape2D_lquwl")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall" unique_id=1419021536]
-position = Vector2(486, 648)
-shape = SubResource("RectangleShape2D_7mycd")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="wall" unique_id=1063643596]
 position = Vector2(768, 330)
@@ -123,8 +1279,14 @@ shape = SubResource("RectangleShape2D_lquwl")
 position = Vector2(488, -11)
 shape = SubResource("RectangleShape2D_7mycd")
 
+[node name="Area2D" type="Area2D" parent="wall" unique_id=199776746]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall/Area2D" unique_id=1419021536]
+position = Vector2(486, 648)
+shape = SubResource("RectangleShape2D_7mycd")
+debug_color = Color(0.8171795, 0.2574397, 0.7820425, 0.41960785)
+
 [node name="coin slot" type="Node2D" parent="." unique_id=478993576]
-script = SubResource("GDScript_5vw27")
 
 [node name="coin_button" type="TextureButton" parent="coin slot" unique_id=838015408]
 texture_filter = 1
@@ -136,39 +1298,77 @@ texture_normal = ExtResource("2_df0lc")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="coin slot" unique_id=155564061]
-offset_left = 474.0
+offset_left = 471.0
 offset_top = 528.0
-offset_right = 514.0
+offset_right = 511.0
 offset_bottom = 551.0
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="blocker" type="Path2D" parent="." unique_id=1112949655]
-position = Vector2(0, -40)
+position = Vector2(0, -186)
 curve = SubResource("Curve2D_7mycd")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="blocker" unique_id=1213242049]
-position = Vector2(679, 487)
+position = Vector2(956, 488)
 rotates = false
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="blocker/PathFollow2D" unique_id=1885624640]
-position = Vector2(-86, 0)
 physics_material_override = SubResource("PhysicsMaterial_7mycd")
 sync_to_physics = false
 script = ExtResource("6_o4jo6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="blocker/PathFollow2D/AnimatableBody2D" unique_id=1414250057]
 texture_filter = 1
-position = Vector2(86.5, 0)
+position = Vector2(0.33996582, 0.080078125)
 rotation = 1.5707964
 scale = Vector2(0.85734916, 0.7600049)
 shape = SubResource("RectangleShape2D_272bh")
 
 [node name="Sprite2D" type="Sprite2D" parent="blocker/PathFollow2D/AnimatableBody2D" unique_id=764856274]
-position = Vector2(86, 0)
+position = Vector2(-0.16003418, 0.08004761)
 scale = Vector2(7.8549967, 0.7600049)
 texture = ExtResource("1_ys6xq")
+
+[node name="goal" type="Path2D" parent="." unique_id=2035908847]
+position = Vector2(-12, -10)
+curve = SubResource("Curve2D_ys6xq")
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="goal" unique_id=349356147]
+position = Vector2(663, 595)
+rotates = false
+
+[node name="Bucket" type="Sprite2D" parent="goal/PathFollow2D2" unique_id=1295942606]
+texture_filter = 1
+position = Vector2(-0.5, -23.25)
+scale = Vector2(4.812499, 4.1562505)
+texture = ExtResource("8_h2jjw")
+
+[node name="deathzone" type="Area2D" parent="goal/PathFollow2D2" unique_id=570160033]
+position = Vector2(6.1035156e-05, 0)
+scale = Vector2(3.4, 1)
+script = ExtResource("7_df0lc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="goal/PathFollow2D2/deathzone" unique_id=1744870034]
+position = Vector2(0.14703369, 0)
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_df0lc")
+debug_color = Color(0.81492907, 0.34465936, 0.5716624, 0.41960785)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="goal/PathFollow2D2" unique_id=727902664]
+physics_material_override = SubResource("PhysicsMaterial_df0lc")
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="goal/PathFollow2D2/AnimatableBody2D" unique_id=37271321]
+position = Vector2(-27.000023, -23)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_h2jjw")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="goal/PathFollow2D2/AnimatableBody2D" unique_id=1452448963]
+position = Vector2(26, -23)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_h2jjw")
 
 [connection signal="pressed" from="button/TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="button/TextureButton" to="dropper/PathFollow2D/Node" method="_on_texture_button_pressed"]
