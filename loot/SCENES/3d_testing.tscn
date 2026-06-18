@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bofascrfvgwb7"]
+
+[ext_resource type="PackedScene" uid="uid://b5e8t436wfs0p" path="res://PLACEHOLDER/stupid.glb" id="1_esid7"]
+[ext_resource type="PackedScene" uid="uid://oxw011qbsvwm" path="res://SCENES/plinko.tscn" id="2_5ngk4"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4e8td"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="3d testing" type="Node3D" unique_id=793726054]
+
+[node name="stupid" parent="." unique_id=1936440555 instance=ExtResource("1_esid7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4227266)
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=480916835]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7640252, 3.7632172, 0)
+texture = SubResource("ViewportTexture_4e8td")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D" unique_id=1066022259]
+size = Vector2i(1152, 648)
+
+[node name="Control" type="Control" parent="Sprite3D/SubViewport" unique_id=1555517244]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Plinko" parent="Sprite3D/SubViewport/Control" unique_id=982277014 instance=ExtResource("2_5ngk4")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1764888127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.475423, 3.716395, 4.3896546)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=123641886]
+transform = Transform3D(0.9830539, 0, 0.18331656, 0, 1, 0, -0.18331656, 0, 0.9830539, 2.7908869, 5.1524334, 9.371284)
