@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dj4wvk4jc5ohi"]
 
 [ext_resource type="Script" uid="uid://bpr64xcqe3p6g" path="res://SCRIPTS/mouse.gd" id="1_btk3i"]
+[ext_resource type="Script" uid="uid://cbif1yqb0l5yt" path="res://SCRIPTS/main.gd" id="1_xkmhv"]
 [ext_resource type="Texture2D" uid="uid://chefd215ty4jn" path="res://PLACEHOLDER/hand.png" id="2_4yn7b"]
 [ext_resource type="Texture2D" uid="uid://hys37tyv1q3x" path="res://PLACEHOLDER/good.png" id="3_i3iqk"]
 
@@ -8,20 +9,24 @@
 radius = 20.024984
 
 [node name="mouse" type="Node2D" unique_id=94472219]
+script = ExtResource("1_xkmhv")
+
+[node name="Mouse" type="Area2D" parent="." unique_id=2030823618]
+position = Vector2(259, 197)
+scale = Vector2(2.6, 2.6)
 script = ExtResource("1_btk3i")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=2030823618]
-scale = Vector2(2.6, 2.6)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1661309796]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mouse" unique_id=1661309796]
+position = Vector2(-5.15691, -4.7723026)
 shape = SubResource("CircleShape2D_bl21d")
 debug_color = Color(0.8368155, 0.34448695, 0.46985596, 0.41960785)
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=417077336]
+[node name="Sprite2D" type="Sprite2D" parent="Mouse" unique_id=417077336]
 texture_filter = 1
+position = Vector2(-5.15691, -4.7723026)
 scale = Vector2(2.2400005, 2.2400005)
 texture = ExtResource("2_4yn7b")
 
 [node name="Good" type="Sprite2D" parent="." unique_id=779467097]
-position = Vector2(224, 106)
+position = Vector2(483, 303)
 texture = ExtResource("3_i3iqk")
