@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://oijnutvytwm3"]
+
+[ext_resource type="Script" uid="uid://bki1dvg8o3ie5" path="res://SCRIPTS/rigid_body_2d.gd" id="1_lia0x"]
+[ext_resource type="Texture2D" uid="uid://c5pskbn021fbt" path="res://PLACEHOLDER/button3.png" id="2_lctme"]
+[ext_resource type="Texture2D" uid="uid://hys37tyv1q3x" path="res://PLACEHOLDER/good.png" id="3_lctme"]
+[ext_resource type="PackedScene" uid="uid://dj4wvk4jc5ohi" path="res://SCENES/mouse.tscn" id="4_qujnn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6rm1t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lia0x"]
+radius = 54.0
+
+[node name="Pickup" type="Node2D" unique_id=1519150327]
+
+[node name="object" type="RigidBody2D" parent="." unique_id=176654870]
+input_pickable = true
+gravity_scale = 0.0
+script = ExtResource("1_lia0x")
+
+[node name="Sprite2D" type="Sprite2D" parent="object" unique_id=1505917676]
+modulate = Color(0.33333334, 1, 0.34901962, 1)
+texture_filter = 1
+scale = Vector2(5.520001, 5.520001)
+texture = ExtResource("2_lctme")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="object" unique_id=1275950047]
+scale = Vector2(4.0800004, 4.0800004)
+shape = SubResource("CircleShape2D_6rm1t")
+
+[node name="Area2D" type="Area2D" parent="object" unique_id=300938294]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="object/Area2D" unique_id=1557806242]
+shape = SubResource("CircleShape2D_lia0x")
+debug_color = Color(0.73182267, 0.44114667, 0.463041, 0.41960785)
+
+[node name="Good" type="Sprite2D" parent="." unique_id=174405567]
+position = Vector2(185, 100)
+texture = ExtResource("3_lctme")
+
+[node name="mouse" parent="." unique_id=94472219 instance=ExtResource("4_qujnn")]

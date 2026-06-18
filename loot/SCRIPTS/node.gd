@@ -1,8 +1,12 @@
 extends Node
 
 @onready var label: Label = $"../../../coin slot/Label"
+
+
 @onready var node: Marker2D = $"."
+
 @onready var path_follow_2d: PathFollow2D = $".."
+
 var ball = preload("res://SCENES/plinko_ball.tscn")
 var speed = 200
 var shoot = false
