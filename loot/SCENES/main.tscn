@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://b1gk4th6cfd1x" path="res://SCRIPTS/animatable_body_2d.gd" id="6_o4jo6"]
 [ext_resource type="Script" uid="uid://belsbryf7lhh2" path="res://SCRIPTS/deathzone.gd" id="7_df0lc"]
 [ext_resource type="Texture2D" uid="uid://p8n6h4cgnamx" path="res://PLACEHOLDER/bucket.png" id="8_h2jjw"]
+[ext_resource type="Texture2D" uid="uid://dnnl1a4w1dfe5" path="res://PLACEHOLDER/bad.png" id="12_5vkv0"]
+[ext_resource type="Texture2D" uid="uid://hys37tyv1q3x" path="res://PLACEHOLDER/good.png" id="13_v5vvh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lquwl"]
 
@@ -27,8 +29,14 @@ point_count = 3
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
 size = Vector2(20, 662)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l28hy"]
+size = Vector2(571, 20)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
-size = Vector2(568, 20)
+size = Vector2(89.51782, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4jo6"]
+size = Vector2(5.5, 49.875)
 
 [sub_resource type="Curve2D" id="Curve2D_7mycd"]
 _data = {
@@ -57,10 +65,46 @@ size = Vector2(66, 13.999977)
 
 [node name="Main" type="Node2D" unique_id=1303778982]
 
+[node name="button" type="Marker2D" parent="." unique_id=592349946]
+position = Vector2(463, 256)
+
+[node name="TextureButton" type="TextureButton" parent="button" unique_id=758273287]
+texture_filter = 1
+offset_left = -78.0
+offset_top = -1.0
+offset_right = 78.0
+offset_bottom = 155.0
+texture_normal = ExtResource("1_ys6xq")
+texture_pressed = ExtResource("2_df0lc")
+texture_hover = ExtResource("3_h2jjw")
+stretch_mode = 0
+
+[node name="coin slot" type="Node2D" parent="." unique_id=478993576]
+position = Vector2(-29, 0)
+
+[node name="coin_button" type="TextureButton" parent="coin slot" unique_id=838015408]
+texture_filter = 1
+offset_left = 470.0
+offset_top = 475.0
+offset_right = 510.0
+offset_bottom = 515.0
+texture_normal = ExtResource("2_df0lc")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="coin slot" unique_id=155564061]
+offset_left = 471.0
+offset_top = 528.0
+offset_right = 511.0
+offset_bottom = 551.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="pegs" type="Node2D" parent="." unique_id=79818689]
+position = Vector2(-22, 0)
 
 [node name="plinko peg" type="RigidBody2D" parent="pegs" unique_id=1769743643]
-position = Vector2(627, 76)
+position = Vector2(625, 76)
 freeze = true
 
 [node name="peg colider" type="CollisionShape2D" parent="pegs/plinko peg" unique_id=1365473359]
@@ -2255,7 +2299,7 @@ shape = SubResource("CircleShape2D_lquwl")
 
 [node name="peg art198" type="Sprite2D" parent="pegs/plinko peg" unique_id=255716372]
 texture_filter = 1
-position = Vector2(367.988, 275.98785)
+position = Vector2(367.98798, 275.98785)
 scale = Vector2(0.74848247, 0.74848247)
 texture = ExtResource("4_ab6ae")
 
@@ -2266,7 +2310,7 @@ shape = SubResource("CircleShape2D_lquwl")
 
 [node name="peg art199" type="Sprite2D" parent="pegs/plinko peg" unique_id=337754741]
 texture_filter = 1
-position = Vector2(367.988, 275.98785)
+position = Vector2(367.98798, 275.98785)
 scale = Vector2(0.74848247, 0.74848247)
 texture = ExtResource("4_ab6ae")
 
@@ -2444,21 +2488,8 @@ texture_filter = 1
 scale = Vector2(1.4, 1.4)
 texture = ExtResource("5_o4jo6")
 
-[node name="button" type="Marker2D" parent="." unique_id=592349946]
-position = Vector2(488, 256)
-
-[node name="TextureButton" type="TextureButton" parent="button" unique_id=758273287]
-texture_filter = 1
-offset_left = -78.0
-offset_top = -1.0
-offset_right = 78.0
-offset_bottom = 155.0
-texture_normal = ExtResource("1_ys6xq")
-texture_pressed = ExtResource("2_df0lc")
-texture_hover = ExtResource("3_h2jjw")
-stretch_mode = 0
-
 [node name="dropper" type="Path2D" parent="." unique_id=1168654586]
+position = Vector2(-22, 0)
 curve = SubResource("Curve2D_lquwl")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="dropper" unique_id=771330223]
@@ -2472,7 +2503,7 @@ script = ExtResource("5_ceyew")
 texture = ExtResource("1_ys6xq")
 
 [node name="wall" type="StaticBody2D" parent="." unique_id=1322147094]
-position = Vector2(384, 0)
+position = Vector2(362, 0)
 
 [node name="Polygon2D" type="Line2D" parent="wall" unique_id=2042254922]
 points = PackedVector2Array(0, 0, 0, 650)
@@ -2497,39 +2528,78 @@ shape = SubResource("RectangleShape2D_lquwl")
 position = Vector2(768, 330)
 shape = SubResource("RectangleShape2D_lquwl")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="wall" unique_id=223875348]
-position = Vector2(488, -11)
-shape = SubResource("RectangleShape2D_7mycd")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall" unique_id=1279049829]
+position = Vector2(492.5, -11)
+shape = SubResource("RectangleShape2D_l28hy")
 
-[node name="Area2D" type="Area2D" parent="wall" unique_id=199776746]
+[node name="prize 1" type="Area2D" parent="wall" unique_id=199776746]
+position = Vector2(259, 636)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall/Area2D" unique_id=1419021536]
-position = Vector2(486, 648)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall/prize 1" unique_id=1419021536]
+position = Vector2(0.125, 0)
 shape = SubResource("RectangleShape2D_7mycd")
 debug_color = Color(0.8171795, 0.2574397, 0.7820425, 0.41960785)
 
-[node name="coin slot" type="Node2D" parent="." unique_id=478993576]
+[node name="divider" type="CollisionShape2D" parent="wall" unique_id=1941062530]
+position = Vector2(306, 622.9375)
+shape = SubResource("RectangleShape2D_o4jo6")
 
-[node name="coin_button" type="TextureButton" parent="coin slot" unique_id=838015408]
-texture_filter = 1
-offset_left = 470.0
-offset_top = 475.0
-offset_right = 510.0
-offset_bottom = 515.0
-texture_normal = ExtResource("2_df0lc")
-stretch_mode = 0
+[node name="prize 2" type="Area2D" parent="wall" unique_id=103961213]
+position = Vector2(351, 636)
 
-[node name="Label" type="Label" parent="coin slot" unique_id=155564061]
-offset_left = 471.0
-offset_top = 528.0
-offset_right = 511.0
-offset_bottom = 551.0
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall/prize 2" unique_id=1217800650]
+position = Vector2(-0.25, 0)
+shape = SubResource("RectangleShape2D_7mycd")
+debug_color = Color(0.8171795, 0.2574397, 0.7820425, 0.41960785)
+
+[node name="divider2" type="CollisionShape2D" parent="wall" unique_id=1332701766]
+position = Vector2(396, 623)
+shape = SubResource("RectangleShape2D_o4jo6")
+
+[node name="prize 3" type="Area2D" parent="wall" unique_id=1976776431]
+position = Vector2(442, 636)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall/prize 3" unique_id=929368959]
+shape = SubResource("RectangleShape2D_7mycd")
+debug_color = Color(0.8171795, 0.2574397, 0.7820425, 0.41960785)
+
+[node name="divider3" type="CollisionShape2D" parent="wall" unique_id=1060651868]
+position = Vector2(486, 623)
+shape = SubResource("RectangleShape2D_o4jo6")
+
+[node name="prize 4" type="Area2D" parent="wall" unique_id=2023605286]
+position = Vector2(531, 636)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall/prize 4" unique_id=1727310043]
+shape = SubResource("RectangleShape2D_7mycd")
+debug_color = Color(0.8171795, 0.2574397, 0.7820425, 0.41960785)
+
+[node name="divider4" type="CollisionShape2D" parent="wall" unique_id=1134901641]
+position = Vector2(576, 623)
+shape = SubResource("RectangleShape2D_o4jo6")
+
+[node name="prize 5" type="Area2D" parent="wall" unique_id=1774375086]
+position = Vector2(621, 636)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall/prize 5" unique_id=1762875229]
+shape = SubResource("RectangleShape2D_7mycd")
+debug_color = Color(0.8171795, 0.2574397, 0.7820425, 0.41960785)
+
+[node name="divider5" type="CollisionShape2D" parent="wall" unique_id=457571483]
+position = Vector2(666, 623)
+shape = SubResource("RectangleShape2D_o4jo6")
+
+[node name="prize 6" type="Area2D" parent="wall" unique_id=2107121144]
+position = Vector2(714.99994, 636)
+scale = Vector2(1.12, 1)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall/prize 6" unique_id=1147380308]
+position = Vector2(0.11608887, 0)
+shape = SubResource("RectangleShape2D_7mycd")
+debug_color = Color(0.8171795, 0.2574397, 0.7820425, 0.41960785)
 
 [node name="blocker" type="Path2D" parent="." unique_id=1112949655]
-position = Vector2(0, -52)
+position = Vector2(-22, -52)
 curve = SubResource("Curve2D_7mycd")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="blocker" unique_id=1213242049]
@@ -2545,16 +2615,16 @@ script = ExtResource("6_o4jo6")
 texture_filter = 1
 position = Vector2(0.33996582, 0.080078125)
 rotation = 1.5707964
-scale = Vector2(0.85734916, 0.7600049)
+scale = Vector2(0.85734916, 0.9600049)
 shape = SubResource("RectangleShape2D_272bh")
 
 [node name="Sprite2D" type="Sprite2D" parent="blocker/PathFollow2D/AnimatableBody2D" unique_id=764856274]
 position = Vector2(-0.16003418, 0.08004761)
-scale = Vector2(7.8549967, 0.7600049)
+scale = Vector2(10.094996, 0.96000487)
 texture = ExtResource("1_ys6xq")
 
 [node name="goal" type="Path2D" parent="." unique_id=2035908847]
-position = Vector2(-12, -10)
+position = Vector2(-34, -15)
 curve = SubResource("Curve2D_ys6xq")
 
 [node name="PathFollow2D2" type="PathFollow2D" parent="goal" unique_id=349356147]
@@ -2591,6 +2661,38 @@ shape = SubResource("RectangleShape2D_h2jjw")
 position = Vector2(26, -23)
 rotation = -1.5707964
 shape = SubResource("RectangleShape2D_h2jjw")
+
+[node name="trash" type="Node" parent="." unique_id=828145112]
+
+[node name="Bad" type="Sprite2D" parent="trash" unique_id=2065598805]
+position = Vector2(620.4268, 630)
+scale = Vector2(5.571642, -1.9402333)
+texture = ExtResource("12_5vkv0")
+
+[node name="Good" type="Sprite2D" parent="trash" unique_id=78225605]
+position = Vector2(713, 630.5)
+scale = Vector2(5.250001, 1.9374965)
+texture = ExtResource("13_v5vvh")
+
+[node name="Good2" type="Sprite2D" parent="trash" unique_id=2143759339]
+position = Vector2(983, 630.99994)
+scale = Vector2(5.124993, 1.9375)
+texture = ExtResource("13_v5vvh")
+
+[node name="Bad2" type="Sprite2D" parent="trash" unique_id=63133224]
+position = Vector2(893, 633.00006)
+scale = Vector2(5.125003, 1.6562504)
+texture = ExtResource("12_5vkv0")
+
+[node name="Bad3" type="Sprite2D" parent="trash" unique_id=1626913119]
+position = Vector2(804.00006, 632.00006)
+scale = Vector2(5.062501, 1.875)
+texture = ExtResource("12_5vkv0")
+
+[node name="Bad4" type="Sprite2D" parent="trash" unique_id=145728456]
+position = Vector2(1077, 632)
+scale = Vector2(5.4375, 1.75)
+texture = ExtResource("12_5vkv0")
 
 [connection signal="pressed" from="button/TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="button/TextureButton" to="dropper/PathFollow2D/Node" method="_on_texture_button_pressed"]

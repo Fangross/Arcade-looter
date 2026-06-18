@@ -2,7 +2,7 @@ extends AnimatableBody2D
 
 
 @onready var path_follow_2d: PathFollow2D = $".."
-var speed = 150
+var speed = 100
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
